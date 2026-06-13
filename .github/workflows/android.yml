@@ -22,5 +22,11 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    
+    # 关键修改：强行下载 Gradle Wrapper 补齐缺失的组件
+    - name: Download Gradle Wrapper
+      run: ./gradlew wrapper
+      
     - name: Build with Gradle
       run: ./gradlew build
+
