@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="katex/katex.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: KaTeX_Main, 'Times New Roman', serif;
+    line-height: 1.6;
+    padding: 12px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+}
+.math-block {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+.math-inline {
+    display: inline;
+    white-space: nowrap;
+}
+</style>
+</head>
+<body>
+<div id="math-container"></div>
+<script src="katex/katex.min.js"></script>
+<script src="katex/auto-render.min.js"></script>
+<script>
+// Receive LaTeX via a global function
+function renderLatex(latex, displayMode) {
+    var container = document.getElementById('math-container');
+    container.innerHTML = '';
+    var wrapper = document.createElement('div');
+    wrapper.className = displayMode ? 'math-block' : 'math-inline';
+    try {
+        katex.render(latex, wrapper, {
+            displayMode: displayMode,
+            throwOnError: false,
+            output: 'html'
+        });
+    } catch (e) {
+        wrapper.textContent = latex;
+        wrapper.style.color = '#999';
+        wrapper.style.fontFamily = 'monospace';
+        wrapper.style.fontSize = '14px';
+    }
+    container.appendChild(wrapper);
+}
+</script>
+</body>
+</html>
